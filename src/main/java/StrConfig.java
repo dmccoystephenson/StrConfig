@@ -55,18 +55,4 @@ public class StrConfig {
     public static class KeyNotPresentException extends Exception {
         // empty
     }
-
-    /**
-     * Intended to be thrown when saving fails.
-     */
-    public static class SaveFailureException extends Exception {
-        // empty
-    }
-
-    /**
-     * Intended to be thrown when loading fails.
-     */
-    public static class LoadFailureException extends Exception {
-        // empty
-    }
 }

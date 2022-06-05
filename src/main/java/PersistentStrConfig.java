@@ -15,7 +15,7 @@ public class PersistentStrConfig extends StrConfig {
         this.saveDirectoryPath = saveDirectoryPath;
     }
 
-    public void save() throws StrConfig.SaveFailureException {
+    public void save() throws SaveFailureException {
         FileWriter fileWriter;
         try {
             fileWriter = new FileWriter(saveDirectoryPath);
@@ -27,11 +27,11 @@ public class PersistentStrConfig extends StrConfig {
             fileWriter.flush();
             fileWriter.close();
         } catch (IOException e) {
-            throw new StrConfig.SaveFailureException();
+            throw new SaveFailureException();
         }
     }
 
-    public void load() throws StrConfig.LoadFailureException {
+    public void load() throws LoadFailureException {
         File file = new File(saveDirectoryPath);
         try {
             Scanner scanner = new Scanner(file);
@@ -40,7 +40,7 @@ public class PersistentStrConfig extends StrConfig {
                 String line = scanner.nextLine();
                 String[] keyValuePair = line.split("=");
                 if (keyValuePair.length != 2) {
-                    throw new StrConfig.LoadFailureException();
+                    throw new LoadFailureException();
                 }
                 String key = keyValuePair[0];
                 String value = keyValuePair[1];
@@ -49,7 +49,21 @@ public class PersistentStrConfig extends StrConfig {
 
             scanner.close();
         } catch(FileNotFoundException e) {
-            throw new StrConfig.LoadFailureException();
+            throw new LoadFailureException();
         }
+    }
+
+    /**
+     * Intended to be thrown when saving fails.
+     */
+    public static class SaveFailureException extends Exception {
+        // empty
+    }
+
+    /**
+     * Intended to be thrown when loading fails.
+     */
+    public static class LoadFailureException extends Exception {
+        // empty
     }
 }
