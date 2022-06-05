@@ -5,7 +5,7 @@ import java.util.HashMap;
  * @since June 4th, 2022
  */
 public class StrConfig {
-    private final HashMap<String, String> map = new HashMap<>();
+    protected final HashMap<String, String> map = new HashMap<>();
 
     /**
      * Retrieve a value associated with a key.
@@ -50,9 +50,23 @@ public class StrConfig {
     }
 
     /**
-     * Thrown when a key is not present in the underlying map.
+     * Intended to be thrown when a key is not present in the underlying map.
      */
     public static class KeyNotPresentException extends Exception {
-        // no body needed
+        // empty
+    }
+
+    /**
+     * Intended to be thrown when saving fails.
+     */
+    public static class SaveFailureException extends Exception {
+        // empty
+    }
+
+    /**
+     * Intended to be thrown when loading fails.
+     */
+    public static class LoadFailureException extends Exception {
+        // empty
     }
 }
